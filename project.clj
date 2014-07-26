@@ -7,7 +7,8 @@
                  [org.clojure/clojurescript "0.0-2268"]
                  [jayq "2.5.1"]
                  [compojure "1.1.8"]
-                 [hiccup "1.0.0"]]
+                 [hiccup "1.0.0"]
+                 [cljs-ajax "0.2.6"]]
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-ring "0.8.11"]]
   :main clojure-spotify-search.server
