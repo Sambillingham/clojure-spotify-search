@@ -1,19 +1,23 @@
 (ns clojure-spotify-search.cs
-    (:use [jayq.core :only [$]])
-    (:require [jayq.core :as jq]
-              [ajax.core :refer [GET]]))
+    (:require [ajax.core :refer [GET]]
+              [dommy.utils :as utils]
+              [dommy.core :as dommy])
+    (:use-macros [dommy.macros :only [node sel sel1]]))
 
-(def $clickhere ($ :#clickhere))
-(def $prevent-default ($ :#google-link))
+(dommy/append! (sel1 :body) [:h1 "Eat some cake"])
 
-(jq/bind $clickhere :click (fn [e] (js/console.log "Clicked!!")))
+(dommy/listen! (sel1 :#google-link) :click (fn [e] (.preventDefault e)))
 
-(jq/bind $prevent-default :click (fn [e] (.preventDefault e)))
+(defn clickEvent [event]
+    (.log js/console "You have clicked the button! Congratulations"))
 
-;(js/console.log (get {:a 1 :b 2 } :a))
+(dommy/listen! (sel1 :#clickhere)
+                :click clickEvent)
+
+(js/console.log (get {:a 1 :b 2 } :a))
 
 (defn append-track [track]
-  (jq/append ($ :body) ( str "<div class='track'>Name: " ( track "name" )  " link: " (track "external_url") "</div>" )))
+  (dommy/append! (sel1 :body) [:.track (str "Name: " ( track "name" )  " link: " ((track "external_urls") "spotify") "" )]))
 
 (defn return-tracks [tracks]
   ((tracks "tracks") "items"))
@@ -28,14 +32,13 @@
   (.log js/console (str "something bad happened: " status " " status-text)))
 
 (defn print-track [track]
-  (js/console.log ( str ( track "name") (track "external_url") )))
+  (js/console.log (str (track "name") (track "external_url") )))
 
-(append-track {"name" "sam" "external_url" "rodger"})
+;(append-track {"name" "sam" "external_url" "rodger"})
 
 (defn loop-tracks [response]
   (dotimes [i (count (return-tracks response)) ]
-    (append-track ((return-tracks response) i))
-      ))
+    (append-track ((return-tracks response) i))))
 
 ;(js/console.log (str i ": " ((return-tracks response) i)
 (js/console.log (subvec {"name" "sam" "external_url" "rodger"} "rodger"))
