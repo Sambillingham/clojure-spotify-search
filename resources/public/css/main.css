@@ -19,3 +19,11 @@ h1 {
     height: 400px;
     background: #e1e1e1;
 }
+
+input.search-field {
+    width:  400px;
+    height: 50px;
+    background: #ececec;
+    margin: 0 auto;
+    border: 0;
+}

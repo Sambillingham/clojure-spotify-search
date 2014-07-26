@@ -6,10 +6,10 @@
 
 (dommy/listen! (sel1 :#google-link) :click (fn [e] (.preventDefault e)))
 
-(defn clickEvent [event]
-    (.log js/console "You have clicked the button! Congratulations"))
+(defn start-search [event]
+    (search-spotify (dommy/value (sel1 :.search-field))))
 
-(dommy/listen! (sel1 :#clickhere) :click clickEvent)
+(dommy/listen! (sel1 :.search) :click start-search)
 
 (defn return-tracks [tracks]
   ((tracks "tracks") "items"))
@@ -33,10 +33,11 @@
   (dotimes [i (count (return-tracks response))]
     (append-track ((return-tracks response) i))))
 
+(defn search-spotify [term]
 (GET "https://api.spotify.com/v1/search"
-  {:params {:q "taking back sunday"
+  {:params {:q term
             :type "track"
-            :limit 5}
+            :limit 10}
     :handler loop-tracks
-    :error-handler error-handler})
+    :error-handler error-handler}))
 
