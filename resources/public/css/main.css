@@ -1,0 +1,21 @@
+main {
+    width: 1000px;
+    background: #fafafa;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align:  center;
+}
+.track {
+    width: 200px;
+    float:  left;
+}
+.track img {
+    max-width: 100%;
+}
+.tracks {
+    clear: both;
+    height: 400px;
+    background: #e1e1e1;
+}

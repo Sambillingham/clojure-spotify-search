@@ -1,31 +1,16 @@
 (ns clojure-spotify-search.server
+  (:use clojure-spotify-search.views)
   (:require
             [compojure.handler :as handler]
             [compojure.route :as route]
             [ring.util.response :as response])
-  (:use [hiccup.core]
+  (:use [hiccup core page]
         [compojure.core]))
 
-(defn view-layout [& content]
-  (html
-      [:head
-           [:meta {:http-equiv "Content-type"
-                        :content "text/html; charset=utf-8"}]
-           [:title "Clojure Spotify Search"]]
-      [:body content]))
-
-(defn view-content []
-  (view-layout
-       [:h2 "Search Spotify"]
-       [:p {:id "clickhere"} "click for console.log"]
-       [:a {:id "google-link" :href "http://google.com"} "A link to google"]
-       [:script {:src "/js/jquery-1.11.1.min.js"}]
-       [:script {:src "/js/cljs.js"}]))
-
-
 (defroutes main-routes
-  (GET "/" []
-      (view-content))
-      (route/resources "/"))
+  (GET "/" [] (index-page))
+  (route/resources "/")
+  (route/not-found "Page not found"))
 
-(def app (handler/site main-routes))
+(def app
+  (handler/site main-routes))
