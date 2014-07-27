@@ -13,7 +13,7 @@
 (defn index-page []
   (view-layout
     [:main
-      [:section.search
+      [:section.intro
         [:h1 "Search Spotify"]
         [:input.search-field {:placeholder "Search for a track"}]
         [:button.search "Search"]]
