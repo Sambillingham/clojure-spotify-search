@@ -1,0 +1,45 @@
+section.intro {
+    margin: 0 auto;
+    padding: 100px 0 50px;
+    background-color: #fff;
+}
+
+.search-form {
+    width: 500px;
+    margin: 0 auto;
+
+    input.search-field {
+        width:  385px;
+        height: 50px;
+        margin: 0 auto;
+        margin-right: 15px;
+        padding: 5px 10px;
+        border: solid 2px @bg-light-border;
+        background: #fafafa;
+        font-family: @main-font;
+        font-weight: 300;
+        font-size: 18px;
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    button.search {
+        width: 100px;
+        height: 50px;
+        float: right;
+        cursor: pointer;
+        border: solid 2px @primary;
+        border-radius: 4px;
+        background: transparent;
+        font-family: @main-font;
+        font-weight: 700;
+        color: @primary;
+        line-height: 1.375;
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}

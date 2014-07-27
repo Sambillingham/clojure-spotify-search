@@ -13,11 +13,13 @@
 (defn index-page []
   (view-layout
     [:main
-      [:section.search
+      [:section.intro
         [:h1 "Search Spotify"]
-        [:input.search-field {:placeholder "Search for a track"}]
-        [:button.search "Search"]]
-       [:section.tracks]
-       [:footer]
-       [:script {:src "/js/jquery-1.11.1.min.js"}]
-       [:script {:src "/js/cljs.js"}]]))
+        [:div.search-form
+          [:input.search-field {:placeholder "Search for a track"}]
+          [:button.search "Search"]]]
+      [:section.tracks
+        [:div.search-results]]
+      [:footer]
+      [:script {:src "/js/jquery-1.11.1.min.js"}]
+      [:script {:src "/js/cljs.js"}]]))

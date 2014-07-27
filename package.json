@@ -1,0 +1,27 @@
+{
+  "name": "clojure-spotify-search",
+  "version": "0.0.1",
+  "description": "Basic search against spotify web api",
+  "main": "project.clj",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Sambillingham/clojure-spotify-search.git"
+  },
+  "author": "@sam_billingham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sambillingham/clojure-spotify-search/issues"
+  },
+  "homepage": "https://github.com/Sambillingham/clojure-spotify-search",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-less": "~0.11.3",
+    "grunt-contrib-watch": "~0.6.1"
+  }
+}
