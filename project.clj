@@ -11,6 +11,7 @@
                  [prismatic/dommy "0.1.2"]]
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-ring "0.8.11"]]
+  :min-lein-version "2.0.0"
   :uberjar-name "clojure-spotify-search-standalone.jar"
   :main clojure-spotify-search.server
   :aot [clojure-spotify-search.server]
