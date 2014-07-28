@@ -18,5 +18,5 @@
 
 (use 'ring.server.standalone)
 
-(defn -main [& args]
-  (serve app {:port 4040}))
+(defn -main [port]
+  (serve app {:port (Integer. port)}))
