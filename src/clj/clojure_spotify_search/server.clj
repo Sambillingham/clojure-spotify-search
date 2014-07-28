@@ -5,7 +5,8 @@
             [compojure.route :as route]
             [ring.util.response :as response])
   (:use [hiccup core page]
-        [compojure.core]))
+        [compojure.core])
+  (:gen-class))
 
 (defroutes main-routes
   (GET "/" [] (index-page))

@@ -13,6 +13,7 @@
             [lein-ring "0.8.11"]]
   :uberjar-name "clojure-spotify-search-standalone.jar"
   :main clojure-spotify-search.server
+  :aot [clojure-spotify-search.server]
   :ring {:handler clojure-spotify-search.server/app}
   :source-paths ["src/clj"]
   :cljsbuild
