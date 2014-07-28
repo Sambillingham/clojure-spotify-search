@@ -356,6 +356,36 @@ td,
 th {
   padding: 0;
 }
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.cf:after {
+  clear: both;
+}
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf,
+section.tracks .search-results,
+section.tracks .search-results .track,
+body,
+main {
+  *zoom: 1;
+}
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
@@ -468,6 +498,16 @@ h1 {
   -webkit-text-fill-color: transparent;
   -webkit-animation: saturate 15s infinite linear;
 }
+span {
+  font-family: 'Roboto', sans-serif;
+  color: #3f35a2;
+}
+a,
+a:link,
+a:visited {
+  color: #22ce77;
+  text-decoration: none;
+}
 section.intro {
   margin: 0 auto;
   padding: 100px 0 50px;
@@ -510,23 +550,98 @@ section.intro {
 }
 section.tracks {
   width: 100%;
-  border-top: solid 2px #EDEDED;
+  height: auto;
+  border-top: solid 2px #ededed;
   background-color: #fafafa;
 }
 section.tracks .search-results {
   width: 1000px;
+  height: auto;
   margin: 0 auto;
+  padding: 40px 0;
+  overflow: hidden;
+}
+section.tracks .search-results a {
+  display: block;
+  float: left;
 }
 section.tracks .search-results .track {
   width: 200px;
   float: left;
-  min-height: 400px;
+  min-height: 275px;
+  padding: 0 12px;
+  position: relative;
+}
+section.tracks .search-results .track.active .play-btn {
+  opacity: 1 !important;
 }
 section.tracks .search-results .track img {
-  width: 80%;
-  margin: : 0 auto;
+  z-index: 1;
+  border: solid 1px #e3e3e3;
+  width: 100%;
+  margin: 0 auto;
   display: block;
   max-width: 100%;
+  border-radius: 4px;
+}
+section.tracks .search-results .track span.name,
+section.tracks .search-results .track span.artist {
+  display: block;
+  width: 100%;
+  float: left;
+}
+section.tracks .search-results .track .name {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #333;
+}
+section.tracks .search-results .track .artist {
+  font-size: 12px;
+  line-height: 1;
+  color: #9B9B9B;
+}
+.play-btn {
+  opacity: 0;
+  z-index: 2;
+  display: block;
+  border: solid 5px rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  height: 81px;
+  width: 81px;
+  padding-left: 24px;
+  padding-top: 22px;
+  margin-left: 47px;
+  margin-top: 47px;
+  position: absolute;
+  top: 0;
+  transition: opacity 0.4s;
+  -webkit-transition: opacity 0.4s;
+}
+.play-btn .arrow-right {
+  display: block;
+  float: left;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 32px solid rgba(255, 255, 255, 0.7);
+}
+.alert {
+  margin: 0 auto;
+  width: 65%;
+  text-align: center;
+  padding: 15px 20px;
+}
+.alert.error {
+  background: rgba(242, 173, 138, 0.2);
+  border: solid 2px rgba(242, 158, 108, 0.5);
+}
+.alert p {
+  font-size: 20px;
+  line-height: 1.4;
+  color: #c65218;
 }
 *,
 *:before,

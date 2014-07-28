@@ -4,6 +4,7 @@
 @import "vendor/normalize";
 
 //includes
+@import "includes/util";
 @import "includes/vars";
 @import "includes/animations";
 @import "includes/mixins";
@@ -22,4 +23,5 @@
 body,
 main {
     background-color: #fafafa;
+    &:extend(.cf);
 }

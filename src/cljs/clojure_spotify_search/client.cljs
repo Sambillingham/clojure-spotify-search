@@ -1,30 +1,22 @@
 (ns clojure-spotify-search.cs
-    (:require [ajax.core :refer [GET]]
+    (:require [clojure-spotify-search.templates :as t]
+              [ajax.core :refer [GET]]
               [dommy.utils :as utils]
               [dommy.core :as dommy])
-    (:use-macros [dommy.macros :only [node sel sel1 deftemplate]]))
+    (:use-macros [dommy.macros :only [sel sel1]]))
 
 (defn album-image [track size]
     ((nth ((track "album")"images") size)"url"))
 
-(deftemplate simple-template [track]
-  [:.track.animated.fadeIn
-    [:span.name (track "name")]
-    [:span.artist (track "artist")]
-    [:a {:href ((track "external_urls") "spotify")} "Play"]
-    [:img {:src (album-image track 1)} :alt "This is an image"]])
-
-(defn track-data [track]
+(defn format-track [track]
   {:name (track "name")
    :artist ((first( track "artists" )) "name")
-   :preview ((track "album") "preview_url")
+   :preview (track "preview_url")
    :play ((track "external_urls") "spotify")
    :image ((nth ((track "album")"images") 1)"url")})
 
 (defn append-track [track]
-  (js/console.log (str (track-data track)))
-  (dommy/append! (sel1 :.search-results) (simple-template track)))
-
+  (dommy/append! (sel1 :.search-results) (t/track-template (format-track track))))
 
 (defn list-tracks [tracks]
   ((tracks "tracks") "items"))
@@ -35,7 +27,8 @@
     (append-track ((list-tracks response) i))))
 
 (defn error-handler [{:keys [status status-text]}]
-  (.log js/console (str "something bad happened: " status " " status-text)))
+  (dommy/clear! (sel1 :.search-results))
+  (dommy/append! (sel1 :.search-results) (t/alert-error)))
 
 (defn search-spotify [term]
 (GET "https://api.spotify.com/v1/search"
@@ -45,16 +38,26 @@
     :handler loop-tracks
     :error-handler error-handler}))
 
-(defn start-search [event]
-    (search-spotify (dommy/value (sel1 :.search-field))))
+(defn start-search []
+  (if (> (count (dommy/value (sel1 :.search-field))) 0 )
+    (search-spotify (dommy/value (sel1 :.search-field)))
+    (error-handler [])))
 
+(defn check-key [event]
+  (if (== (.-which event) 13 )
+    (start-search)))
+
+(defn add-class [event]
+    (dommy/add-class! (.-selectedTarget event) "active"))
+
+(defn remove-class [event]
+    (dommy/remove-class! (.-selectedTarget event) "active"))
+
+(dommy/listen! [(sel1 :.search-results) :.track] "mouseover" add-class "mouseout" remove-class)
 (dommy/listen! (sel1 :.search) :click start-search)
-
-
+(dommy/listen! (sel1 :.search-field) :keyup check-key)
 (-> js/document (sel1 :.search-field) (.focus))
 
-(defn log-track [track]
-  (js/console.log (track "name")))
 
 
 

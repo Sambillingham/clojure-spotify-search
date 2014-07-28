@@ -1,23 +1,109 @@
 section.tracks {
     width: 100%;
-    border-top: solid 2px #EDEDED;
-    background-color: #fafafa;
+    height: auto;
+    border-top: solid 2px @bg-light-border;
+    background-color: @bg-light;
 
     .search-results {
         width: 1000px;
+        height: auto;
         margin: 0 auto;
+        padding: 40px 0;
+        overflow: hidden;
+        &:extend(.cf);
 
+        a {
+            display: block;
+            float: left;
+        }
         .track {
+            &:extend(.cf);
             width: 200px;
-            float:  left;
-            min-height: 400px;
+            float: left;
+            min-height: 275px;
+            padding: 0 12px;
+            position: relative;
 
+            &.active{
+
+                .play-btn  {
+                    opacity: 1 !important;
+                }
+            }
             img {
-                width: 80%;
-                margin: : 0 auto;
+                z-index: 1;
+                border: solid 1px @bg-darker-border;
+                width: 100%;
+                margin: 0 auto;
                 display: block;
                 max-width: 100%;
+                border-radius: 4px;
+
             }
+            span.name,
+            span.artist {
+                display: block;
+                width: 100%;
+                float: left;
+            }
+            .name {
+                margin-top: 10px;
+                margin-bottom: 5px;
+                font-size: 14px;
+                line-height: 1.3;
+                color: #333;
+            }
+            .artist{
+                font-size: 12px;
+                line-height: 1;
+                color: #9B9B9B;
+            }
+
         }
+    }
+}
+
+.play-btn {
+    opacity: 0;
+    z-index: 2;
+    display: block;
+    border: solid 5px rgba(255,255,255, 0.7);
+    border-radius: 50%;
+    height: 81px;
+    width: 81px;
+    padding-left: 24px;
+    padding-top: 22px;
+    margin-left: 47px;
+    margin-top: 47px;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.4s;
+    -webkit-transition: opacity 0.4s;
+
+    .arrow-right {
+        display: block;
+        float: left;
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 32px solid rgba(255,255,255, 0.7);
+    }
+}
+
+.alert {
+        margin: 0 auto;
+        width: 65%;
+        text-align: center;
+        padding: 15px 20px;
+
+    &.error {
+        background: @error;
+        border: solid 2px @error-secondary;
+    }
+    p {
+        font-size: 20px;
+        line-height: 1.4;
+        color: @error-text;
     }
 }
