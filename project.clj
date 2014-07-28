@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2268"]
+                 [ring-server "0.3.1"]
                  [compojure "1.1.8"]
                  [hiccup "1.0.0"]
                  [cljs-ajax "0.2.6"]
@@ -15,6 +16,7 @@
   :uberjar-name "clojure-spotify-search-standalone.jar"
   :main clojure-spotify-search.server
   :aot [clojure-spotify-search.server]
+  :profiles {:uberjar {:main clojure-spotify-search.server, :aot :all}}
   :ring {:handler clojure-spotify-search.server/app}
   :source-paths ["src/clj"]
   :cljsbuild

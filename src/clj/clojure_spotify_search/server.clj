@@ -15,3 +15,8 @@
 
 (def app
   (handler/site main-routes))
+
+(use 'ring.server.standalone)
+
+(defn -main [& args]
+  (serve app {:port 4040}))

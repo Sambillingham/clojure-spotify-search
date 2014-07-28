@@ -14,4 +14,4 @@
 
 (deftemplate alert-error []
   [:.alert.error.animated.fadeInDown
-    [:p "Opps! Looks like something has going wrong try searching again"]])
+    [:p "Opps! Looks like something has gone wrong try searching again"]])
